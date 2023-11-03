@@ -81,10 +81,10 @@ namespace _24CV_WEB.Services.ContractServices
 
 		public Curriculum GetById(int id)
 		{
-			throw new NotImplementedException();
-		}
+            return _repository.GetById(id);
+        }
 
-		public ResponseHelper Update(Curriculum model)
+        public ResponseHelper Update(Curriculum model)
 		{
 			throw new NotImplementedException();
 		}

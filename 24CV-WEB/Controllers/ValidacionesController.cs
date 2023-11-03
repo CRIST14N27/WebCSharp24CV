@@ -47,9 +47,17 @@ namespace _24CV_WEB.Controllers
             return View(_curriculumService.GetAll());
         }
 
-        public IActionResult VPC()
+        public IActionResult VPC(int id)
         {
-            return View();
+            // Obtén el Curriculum correspondiente según el id
+            var curriculum = _curriculumService.GetById(id);
+
+            if (curriculum == null)
+            {
+                return NotFound();
+            }
+
+            return View("VPC", curriculum);
         }
     }
 }
