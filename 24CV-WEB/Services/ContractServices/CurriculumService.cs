@@ -59,10 +59,38 @@ namespace _24CV_WEB.Services.ContractServices
 
 		public ResponseHelper Delete(int id)
 		{
-			throw new NotImplementedException();
-		}
+            ResponseHelper responseHelper = new ResponseHelper();
 
-		public List<Curriculum> GetAll()
+            try
+            {
+                Curriculum curriculum = _repository.GetById(id);
+
+                if (curriculum != null)
+                {
+                    if (_repository.Delete(id) > 0)
+                    {
+                        responseHelper.Success = true;
+                        responseHelper.Message = $"Se eliminó el currículum de {curriculum.Nombre} con éxito.";
+                    }
+                    else
+                    {
+                        responseHelper.Message = "Ocurrió un error al eliminar el currículum.";
+                    }
+                }
+                else
+                {
+                    responseHelper.Message = "El currículum no se encontró en la base de datos.";
+                }
+            }
+            catch (Exception e)
+            {
+                responseHelper.Message = $"Ocurrió un error al eliminar el currículum. Error: {e.Message}";
+            }
+
+            return responseHelper;
+        }
+
+        public List<Curriculum> GetAll()
 		{
 			List<Curriculum> list = new List<Curriculum>();
 
@@ -85,8 +113,27 @@ namespace _24CV_WEB.Services.ContractServices
         }
 
         public ResponseHelper Update(Curriculum model)
-		{
-			throw new NotImplementedException();
-		}
-	}
+        {
+            ResponseHelper responseHelper = new ResponseHelper();
+
+            try
+            {
+                if (_repository.Update(model) > 0)
+                {
+                    responseHelper.Success = true;
+                    responseHelper.Message = $"Se actualizó el currículum de {model.Nombre} con éxito.";
+                }
+                else
+                {
+                    responseHelper.Message = "Ocurrió un error al actualizar el currículum.";
+                }
+            }
+            catch (Exception e)
+            {
+                responseHelper.Message = $"Ocurrió un error al actualizar el currículum. Error: {e.Message}";
+            }
+
+            return responseHelper;
+        }
+    }
 }

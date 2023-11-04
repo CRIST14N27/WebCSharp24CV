@@ -49,7 +49,6 @@ namespace _24CV_WEB.Controllers
 
         public IActionResult VPC(int id)
         {
-            // Obtén el Curriculum correspondiente según el id
             var curriculum = _curriculumService.GetById(id);
 
             if (curriculum == null)
@@ -58,6 +57,33 @@ namespace _24CV_WEB.Controllers
             }
 
             return View("VPC", curriculum);
+        }
+        [HttpGet]
+        public IActionResult Editar(int id)
+        {
+            var curriculum = _curriculumService.GetById(id);
+            return View(curriculum);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(Curriculum model)
+        {
+            _curriculumService.Update(model);
+            return RedirectToAction("Lista");
+        }
+
+        [HttpGet]
+        public IActionResult Eliminar(int id)
+        {
+            var curriculum = _curriculumService.GetById(id);
+            return View(curriculum);
+        }
+
+        [HttpPost]
+        public IActionResult ConfirmarEliminar(int id)
+        {
+            _curriculumService.Delete(id);
+            return RedirectToAction("Lista");
         }
     }
 }
