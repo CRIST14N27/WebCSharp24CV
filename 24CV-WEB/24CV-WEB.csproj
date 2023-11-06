@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Fotos\" />
+    <None Include="wwwroot\Fotos\circus.png" />
   </ItemGroup>
 
 </Project>
